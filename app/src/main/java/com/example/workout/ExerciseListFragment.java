@@ -83,9 +83,21 @@ public class ExerciseListFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         // Adding text and image to the Recycler View
-        dataSets.add(new ExerciseDataSet("Card 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Card 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Card 3", R.drawable.image3));
+        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
+        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
+        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
+        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
+        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
+        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
+        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
+        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
+        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
+        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
+        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
+        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
+        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
+        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
+        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
 
         // Set Adapter for Recycler view
         ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets,  getActivity());
