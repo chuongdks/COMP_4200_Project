@@ -100,7 +100,7 @@ public class ExerciseListFragment extends Fragment {
         dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
 
         // Set Adapter for Recycler view
-        ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets,  getActivity());
+        ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets, getActivity());
         recyclerView.setAdapter(myAdapter);
     }
 }

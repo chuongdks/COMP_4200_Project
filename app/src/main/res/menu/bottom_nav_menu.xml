@@ -5,17 +5,17 @@
         android:title="Home"
         android:icon="@drawable/home_icon"/>
     <item
-        android:id="@+id/stat_menu"
-        android:title="Stat"
-        android:icon="@drawable/stat_icon"/>
+        android:id="@+id/list_menu"
+        android:title="Exercises"
+        android:icon="@drawable/list_icon"/>
     <item
         android:id="@+id/start_menu"
         android:title="Start"
         android:icon="@drawable/start_icon"/>
     <item
-        android:id="@+id/list_menu"
-        android:title="Exercises"
-        android:icon="@drawable/list_icon"/>
+        android:id="@+id/stat_menu"
+        android:title="Statistic"
+        android:icon="@drawable/stat_icon"/>
     <item
         android:id="@+id/user_menu"
         android:title="Settings"

@@ -1,9 +1,12 @@
 package com.example.workout;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,8 +47,19 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         holder.cardVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = "You click a card" + (position + 1);
+                String msg = "You click a card " + (position + 1);
                 Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // Change Text Color based on the Button Text
+        holder.detailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = "You click button " + (position + 1);
+                Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                // Intent intent = new Intent(context.getApplicationContext(), Card2Activity.class);
+                // context.startActivity(intent);
             }
         });
     }
@@ -59,15 +73,17 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
     // ViewHolder class
     // Basically "main" class that has image, text and card info of each cardView
     static class MyViewHolder extends RecyclerView.ViewHolder {
+        CardView cardVIew;
         ImageView imageView;
         TextView textView;
-        CardView cardVIew;
+        Button detailButton;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageView = itemView.findViewById(R.id.image_view);
             textView = itemView.findViewById(R.id.tv_card);
             cardVIew = itemView.findViewById(R.id.card_view_test);
+            detailButton = itemView.findViewById(R.id.bt_detail);
         }
     }
 }
