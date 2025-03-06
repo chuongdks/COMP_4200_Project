@@ -1,8 +1,7 @@
-package com.example.workout;
+package com.example.workout.fragments.exercise;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
+import com.example.workout.R;
+import com.example.workout.WorkoutViewModel;
+import com.example.workout.fragments.exercise.activities.ExerciseDetailActivity;
 import java.util.ArrayList;
 
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyViewHolder>{
-    // Member has Arraylist of Text n Image and Context
+    // Member has Arraylist of Text n Image, Context and
     ArrayList<ExerciseDataSet> dataList;
     Context context;
+    WorkoutViewModel viewModel;
 
     // Constructor
-    public ExerciseAdapter(ArrayList<ExerciseDataSet> data, Context context) {
+    public ExerciseAdapter(ArrayList<ExerciseDataSet> data, Context context, ViewModelStoreOwner viewModelOwner) {
         this.dataList = data;
         this.context = context;
+        this.viewModel = new ViewModelProvider(viewModelOwner).get(WorkoutViewModel.class);;
     }
 
     // WHat is MyViewHolder (https://stackoverflow.com/questions/59919366/what-is-recyclerview-adaptermyadapter-myviewholder-and-how-it-is-different-fro) and (https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder)
@@ -47,6 +53,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         holder.cardVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                viewModel.setSelectedExercise(data);
                 String msg = "You click a card " + (position + 1);
                 Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
@@ -56,10 +63,12 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         holder.detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String msg = "You click button " + (position + 1);
-                Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
-                // Intent intent = new Intent(context.getApplicationContext(), Card2Activity.class);
-                // context.startActivity(intent);
+                Intent intent = new Intent(context, ExerciseDetailActivity.class);
+                intent.putExtra("EXERCISE_NAME", data.getText());
+                intent.putExtra("EXERCISE_IMAGE", data.getImage());
+                intent.putExtra("EXERCISE_DESCRIPTION", data.getDescription());
+                intent.putExtra("EXERCISE_MUSCLE_GROUP", data.getMuscleGroup());
+                context.startActivity(intent);
             }
         });
     }
@@ -79,7 +88,6 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
         Button detailButton;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-
             imageView = itemView.findViewById(R.id.image_view);
             textView = itemView.findViewById(R.id.tv_card);
             cardVIew = itemView.findViewById(R.id.card_view_test);

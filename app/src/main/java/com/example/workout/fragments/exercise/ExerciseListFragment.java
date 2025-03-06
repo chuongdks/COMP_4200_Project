@@ -1,15 +1,18 @@
-package com.example.workout;
+package com.example.workout.fragments.exercise;
 
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.workout.R;
+import com.example.workout.WorkoutViewModel;
+import com.example.workout.fragments.StartFragment;
 
 import java.util.ArrayList;
 
@@ -22,6 +25,7 @@ public class ExerciseListFragment extends Fragment {
     // Declare variable
     RecyclerView recyclerView;
     ArrayList<ExerciseDataSet> dataSets = new ArrayList<>();
+    WorkoutViewModel viewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -75,32 +79,26 @@ public class ExerciseListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // assign View by id
+        // assign Recycler view by id and set the Layout
         recyclerView = view.findViewById(R.id.rec_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // Layout???
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(linearLayoutManager);
+        // create viewModel Instance
+        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
 
-        // Adding text and image to the Recycler View
-        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
-        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
-        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
-        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
-        dataSets.add(new ExerciseDataSet("Exercise 1", R.drawable.image1));
-        dataSets.add(new ExerciseDataSet("Exercise 2", R.drawable.image2));
-        dataSets.add(new ExerciseDataSet("Exercise 3", R.drawable.image3));
+        // Adding ExerciseDataSets to the Recycler View (todo: add a class that have a list of exercise)
+        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
+        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest, Triceps"));
+        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
+        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest, Triceps"));
+        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
+        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest, Triceps"));
 
         // Set Adapter for Recycler view
-        ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets, getActivity());
+        ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets, getActivity(), this);     // or use requireActivity() in "this"
         recyclerView.setAdapter(myAdapter);
     }
 }

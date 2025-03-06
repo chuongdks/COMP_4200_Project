@@ -1,19 +1,27 @@
-package com.example.workout;
+package com.example.workout.fragments;
 
 import android.os.Bundle;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import com.example.workout.R;
+import com.example.workout.WorkoutViewModel;
+import com.example.workout.fragments.exercise.ExerciseDataSet;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StatisticFragment#newInstance} factory method to
+ * Use the {@link StartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StatisticFragment extends Fragment {
+public class StartFragment extends Fragment {
+    private WorkoutViewModel viewModel;
+    private TextView exerciseName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +32,7 @@ public class StatisticFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public StatisticFragment() {
+    public StartFragment() {
         // Required empty public constructor
     }
 
@@ -34,11 +42,11 @@ public class StatisticFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StatisticFragment.
+     * @return A new instance of fragment StartFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StatisticFragment newInstance(String param1, String param2) {
-        StatisticFragment fragment = new StatisticFragment();
+    public static StartFragment newInstance(String param1, String param2) {
+        StartFragment fragment = new StartFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +67,24 @@ public class StatisticFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistic, container, false);
+        return inflater.inflate(R.layout.fragment_start, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assign View by ID
+        exerciseName = view.findViewById(R.id.exercise_name);
+        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+
+        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), new Observer<ExerciseDataSet>() {
+            @Override
+            public void onChanged(ExerciseDataSet exercise) {
+                if (exercise != null) {
+                    exerciseName.setText("Selected Exercise: " + exercise.getText());
+                }
+            }
+        });
     }
 }

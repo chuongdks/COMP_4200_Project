@@ -1,4 +1,4 @@
-package com.example.workout;
+package com.example.workout.fragments;
 
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.workout.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

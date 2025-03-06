@@ -10,12 +10,20 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.workout.fragments.exercise.ExerciseListFragment;
+import com.example.workout.fragments.HomeFragment;
+import com.example.workout.fragments.StartFragment;
+import com.example.workout.fragments.StatisticFragment;
+import com.example.workout.fragments.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    //
+    // add Global variables here
     BottomNavigationView bottomNavigationView;
+    WorkoutViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        // https://developer.android.com/guide/fragments/communicate#host-activity (Example in MainActivity)
+        viewModel = new ViewModelProvider(this).get(WorkoutViewModel.class);
+
+        //
         bottomNavigationView = findViewById(R.id.bottomNav);
         Fragment firstFragment = new HomeFragment();
         setCurrentFragment(firstFragment);
@@ -52,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedFragment = new UserFragment();
             }
 
-            // It will help to replace the
-            // one fragment to other.
+            // Set the Fragment
             if (selectedFragment != null) {
                 setCurrentFragment(selectedFragment);
             }
@@ -62,17 +73,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Apple Fragment Function
-    public void appleFoo(View view) {
-        HomeFragment hf = new HomeFragment();
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.frame, hf);
-        ft.addToBackStack(null);
-        ft.commit();
-    }
-
-    //
+    // Function to set the Fragment and activate it
     private void setCurrentFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
