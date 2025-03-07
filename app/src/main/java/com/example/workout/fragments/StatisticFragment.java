@@ -23,7 +23,7 @@ import com.example.workout.WorkoutViewModel;
  */
 public class StatisticFragment extends Fragment {
     WorkoutViewModel viewModel;
-    TextView exerciseName, workoutCount;
+    TextView statView, workoutCount;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,13 +77,14 @@ public class StatisticFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Assign View by ID
-        exerciseName = view.findViewById(R.id.tv_stat);
+        statView = view.findViewById(R.id.tv_stat);
         workoutCount = view.findViewById(R.id.tv_workout_count);
         viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
 
         viewModel.getMuscleGroupCount().observe(getViewLifecycleOwner(), counts -> {
             String leastWorkedMuscle = viewModel.getLeastWorkedMuscleGroup();
-            Log.d("Suggestion", "You should train more: " + leastWorkedMuscle);
+            Log.d("test", "Train more: " + leastWorkedMuscle);
+            statView.setText(leastWorkedMuscle);
         });
 
         // Observe workout count

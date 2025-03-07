@@ -56,12 +56,15 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
             public void onClick(View v) {
                 // Store the selected exercise inside the viewModel
                 viewModel.setSelectedExercise(data);
-                String msg = "You have added " + (position + 1) + " " +data.getName();
+                viewModel.addExerciseToMuscleMap(data);
+
+                // Toast msg
+                String msg = "You have added " + (position + 1) + " " + data.getName();
                 Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
 
-        // Change Text Color based on the Button Text
+        // Send data to Detail Activity
         holder.detailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
