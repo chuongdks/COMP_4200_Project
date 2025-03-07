@@ -3,7 +3,6 @@ package com.example.workout.fragments.exercise;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.workout.R;
 import com.example.workout.WorkoutViewModel;
-import com.example.workout.fragments.StartFragment;
-
 import java.util.ArrayList;
 
 /**

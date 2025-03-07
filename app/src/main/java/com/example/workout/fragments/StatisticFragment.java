@@ -2,13 +2,19 @@ package com.example.workout.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.workout.R;
+import com.example.workout.WorkoutViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +22,8 @@ import com.example.workout.R;
  * create an instance of this fragment.
  */
 public class StatisticFragment extends Fragment {
+    WorkoutViewModel viewModel;
+    TextView exerciseName, workoutCount;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,5 +70,25 @@ public class StatisticFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_statistic, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Assign View by ID
+        exerciseName = view.findViewById(R.id.tv_stat);
+        workoutCount = view.findViewById(R.id.tv_workout_count);
+        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+
+        viewModel.getMuscleGroupCount().observe(getViewLifecycleOwner(), counts -> {
+            String leastWorkedMuscle = viewModel.getLeastWorkedMuscleGroup();
+            Log.d("Suggestion", "You should train more: " + leastWorkedMuscle);
+        });
+
+        // Observe workout count
+        viewModel.getWorkoutCount().observe(getViewLifecycleOwner(), count -> {
+            workoutCount.setText("Total Workouts: " + count);
+        });
     }
 }

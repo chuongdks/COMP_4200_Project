@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,10 +27,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
     WorkoutViewModel viewModel;
 
     // Constructor
-    public ExerciseAdapter(ArrayList<ExerciseDataSet> data, Context context, ViewModelStoreOwner viewModelOwner) {
+    public ExerciseAdapter(ArrayList<ExerciseDataSet> data, Context context, Fragment fragment) {
         this.dataList = data;
         this.context = context;
-        this.viewModel = new ViewModelProvider(viewModelOwner).get(WorkoutViewModel.class);;
+        this.viewModel = new ViewModelProvider(fragment.requireActivity()).get(WorkoutViewModel.class);
     }
 
     // WHat is MyViewHolder (https://stackoverflow.com/questions/59919366/what-is-recyclerview-adaptermyadapter-myviewholder-and-how-it-is-different-fro) and (https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder)
@@ -48,13 +49,14 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ExerciseDataSet data = dataList.get(position);
         holder.imageView.setImageResource(data.getImage());
-        holder.textView.setText(data.getText());
+        holder.textView.setText(data.getName());
 
         holder.cardVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Store the selected exercise inside the viewModel
                 viewModel.setSelectedExercise(data);
-                String msg = "You click a card " + (position + 1);
+                String msg = "You have added " + (position + 1) + " " +data.getName();
                 Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
@@ -64,7 +66,7 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyView
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ExerciseDetailActivity.class);
-                intent.putExtra("EXERCISE_NAME", data.getText());
+                intent.putExtra("EXERCISE_NAME", data.getName());
                 intent.putExtra("EXERCISE_IMAGE", data.getImage());
                 intent.putExtra("EXERCISE_DESCRIPTION", data.getDescription());
                 intent.putExtra("EXERCISE_MUSCLE_GROUP", data.getMuscleGroup());

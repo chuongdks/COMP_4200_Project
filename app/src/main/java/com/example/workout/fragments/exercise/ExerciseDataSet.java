@@ -16,7 +16,7 @@ public class ExerciseDataSet {
 
     // Getter for MyDataSet
     public int getImage() { return image; }
-    public String getText() { return text; }
+    public String getName() { return text; }
     public String getDescription() { return description; }
     public String getMuscleGroup() { return muscleGroup; }
 }

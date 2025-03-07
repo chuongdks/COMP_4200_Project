@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +22,8 @@ import com.example.workout.fragments.exercise.ExerciseDataSet;
  * create an instance of this fragment.
  */
 public class StartFragment extends Fragment {
-    private WorkoutViewModel viewModel;
-    private TextView exerciseName;
+    WorkoutViewModel viewModel;
+    TextView exerciseName;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,12 +80,10 @@ public class StartFragment extends Fragment {
         exerciseName = view.findViewById(R.id.exercise_name);
         viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
 
-        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), new Observer<ExerciseDataSet>() {
-            @Override
-            public void onChanged(ExerciseDataSet exercise) {
-                if (exercise != null) {
-                    exerciseName.setText("Selected Exercise: " + exercise.getText());
-                }
+        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
+            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
+            if (exercise != null) {
+                exerciseName.setText("Selected Exercise: " + exercise.getName());
             }
         });
     }
