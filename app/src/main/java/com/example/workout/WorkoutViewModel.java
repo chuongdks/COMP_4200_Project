@@ -42,29 +42,6 @@ public class WorkoutViewModel extends ViewModel {
         counts.put(muscleGroup, counts.getOrDefault(muscleGroup, 0) + 1);           // getOrDefault() https://www.geeksforgeeks.org/hashmap-getordefaultkey-defaultvalue-method-in-java-with-examples/
         muscleGroupCount.setValue(counts);
     }
-    public String getLeastWorkedMuscleGroup() {
-        Map<String, Integer> counts = muscleGroupCount.getValue();
-        if (counts == null || counts.isEmpty()) return "You havent done anything";
-
-        // Return the muscle group with the lowest count (value number)
-        Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
-                counts.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
-        );
-
-        // Total exercises done
-        int totalWorkouts = 0;
-
-        // String Builder for the result
-        StringBuilder result = new StringBuilder("Workout Stats:\n");
-        for (Map.Entry<String, Integer> entry : counts.entrySet()) {
-            result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-            totalWorkouts += entry.getValue();  // Add to total everytime an exercise is added
-        }
-        result.append("\n💡 Suggestion: Train more ").append(leastWorkedMuscle.getKey());
-        result.append("\nTotal Workouts: ").append(totalWorkouts);
-
-        return result.toString();
-    }
 
     // Increment and Getter for number of Workout (Done nothing yet)
     public LiveData<Integer> getWorkoutCount() {

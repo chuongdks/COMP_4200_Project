@@ -16,6 +16,10 @@ import android.widget.TextView;
 import com.example.workout.R;
 import com.example.workout.WorkoutViewModel;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StatisticFragment#newInstance} factory method to
@@ -82,9 +86,32 @@ public class StatisticFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
 
         viewModel.getMuscleGroupCount().observe(getViewLifecycleOwner(), counts -> {
-            String leastWorkedMuscle = viewModel.getLeastWorkedMuscleGroup();
-            Log.d("test", "Train more: " + leastWorkedMuscle);
-            statView.setText(leastWorkedMuscle);
+            if (counts == null || counts.isEmpty()) {
+                statView.setText("You haven't done anything");
+                return;
+            }
+
+            // Find the least worked muscle group
+            Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
+                    counts.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
+            );
+
+            // Total exercises done
+            int totalWorkouts = 0;
+
+            // Build the workout stats string
+            StringBuilder result = new StringBuilder("Workout Stats:\n");
+            for (Map.Entry<String, Integer> entry : counts.entrySet()) {
+                result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                totalWorkouts += entry.getValue();  // Sum up total workouts
+            }
+
+            result.append("\n💡 Suggestion: Train more ").append(leastWorkedMuscle.getKey());
+            result.append("\nTotal Workouts: ").append(totalWorkouts);
+
+            // Update UI
+            Log.d("test", "Train more: " + result.toString());
+            statView.setText(result.toString());
         });
 
         // Observe workout count

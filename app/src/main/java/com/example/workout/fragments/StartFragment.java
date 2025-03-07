@@ -83,7 +83,7 @@ public class StartFragment extends Fragment {
         viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
             Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
             if (exercise != null) {
-                exerciseName.setText("Selected Exercise: " + exercise.getName());
+                exerciseName.setText("Selected Exercise: " + exercise.getName() + "\nDescription: " + exercise.getDescription());
             }
         });
     }
