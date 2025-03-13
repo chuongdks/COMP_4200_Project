@@ -1,17 +1,17 @@
-package com.example.workout;
+package com.example.workout.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.workout.R;
 import com.example.workout.fragments.exercise.ExerciseListFragment;
 import com.example.workout.fragments.HomeFragment;
 import com.example.workout.fragments.StartFragment;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // https://developer.android.com/guide/fragments/communicate#host-activity (Example in MainActivity)
         viewModel = new ViewModelProvider(this).get(WorkoutViewModel.class);
 
-        //
+        // Bottom Navigation (https://www.geeksforgeeks.org/bottomnavigationview-inandroid/)
         bottomNavigationView = findViewById(R.id.bottomNav);
         Fragment firstFragment = new HomeFragment();
         setCurrentFragment(firstFragment);
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Function to set the Fragment and activate it
-    private void setCurrentFragment(Fragment fragment) {
+    void setCurrentFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frame, fragment)

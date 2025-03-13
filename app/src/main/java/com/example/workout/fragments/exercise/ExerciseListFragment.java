@@ -3,14 +3,13 @@ package com.example.workout.fragments.exercise;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.workout.R;
-import com.example.workout.WorkoutViewModel;
+import com.example.workout.activities.WorkoutViewModel;
 import java.util.ArrayList;
 
 /**
@@ -95,7 +94,7 @@ public class ExerciseListFragment extends Fragment {
         dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
 
         // Set Adapter for Recycler view
-        ExerciseAdapter myAdapter = new ExerciseAdapter(dataSets, getActivity(), this);     // or use requireActivity() in "this"
+        ExerciseFragmentAdapter myAdapter = new ExerciseFragmentAdapter(dataSets, getActivity(), this);     // or use requireActivity() in "this"
         recyclerView.setAdapter(myAdapter);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.workout;
+package com.example.workout.activities;
 
 import android.util.Log;
 
@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.workout.fragments.exercise.ExerciseDataSet;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,4 +53,6 @@ public class WorkoutViewModel extends ViewModel {
             workoutCount.setValue(workoutCount.getValue() + 1);
         }
     }
+
+    // test
 }

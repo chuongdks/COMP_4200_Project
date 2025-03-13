@@ -13,21 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.workout.R;
-import com.example.workout.WorkoutViewModel;
+import com.example.workout.activities.WorkoutViewModel;
 import com.example.workout.fragments.exercise.activities.ExerciseDetailActivity;
 import java.util.ArrayList;
 
-public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.MyViewHolder>{
+public class ExerciseFragmentAdapter extends RecyclerView.Adapter<ExerciseFragmentAdapter.MyViewHolder>{
     // Member has Arraylist of Text n Image, Context and
     ArrayList<ExerciseDataSet> dataList;
     Context context;
     WorkoutViewModel viewModel;
 
     // Constructor
-    public ExerciseAdapter(ArrayList<ExerciseDataSet> data, Context context, Fragment fragment) {
+    public ExerciseFragmentAdapter(ArrayList<ExerciseDataSet> data, Context context, Fragment fragment) {
         this.dataList = data;
         this.context = context;
         this.viewModel = new ViewModelProvider(fragment.requireActivity()).get(WorkoutViewModel.class);
