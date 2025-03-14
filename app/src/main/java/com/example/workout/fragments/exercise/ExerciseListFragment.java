@@ -1,5 +1,9 @@
 package com.example.workout.fragments.exercise;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -10,6 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
+import com.example.workout.database.DBHelper;
+import com.example.workout.database.ExerciseDatabase;
+import com.example.workout.fragments.exercise.activities.ExerciseDetailActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 /**
@@ -22,6 +31,7 @@ public class ExerciseListFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<ExerciseDataSet> dataSets = new ArrayList<>();
     WorkoutViewModel viewModel;
+    FloatingActionButton addExerciseButton;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -77,24 +87,40 @@ public class ExerciseListFragment extends Fragment {
 
         // assign Recycler view by id and set the Layout
         recyclerView = view.findViewById(R.id.rec_view);
+        addExerciseButton = view.findViewById(R.id.fab_add);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // create viewModel Instance. not needed here just testing
-        // viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+        // Create an exercise database
+        DBHelper db = new DBHelper(getContext(), "exerciseDB", null, 1);
+        db.getWritableDatabase();
 
-        // Adding ExerciseDataSets to the Recycler View (todo: add a class that have a list of exercise)
-        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
-        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
-        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
-        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
-        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
-        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
-        dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
-        dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
-        dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
+        dataSets.clear();
+        dataSets.addAll(db.getAllExercises());
 
-        // Set Adapter for Recycler view
-        ExerciseFragmentAdapter myAdapter = new ExerciseFragmentAdapter(dataSets, getActivity(), this);     // or use requireActivity() in "this"
-        recyclerView.setAdapter(myAdapter);
+        // Check if db is empty by checking dataSets
+        if (dataSets.isEmpty()) {
+            // Adding ExerciseDataSets to the Recycler View (todo: add a class that have a list of exercise)
+            dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
+            dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+            dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
+
+            // save to database if empty
+            for (ExerciseDataSet exercise : dataSets) {
+                db.addExercise(exercise);
+            }
+        }
+
+         // Set Adapter for Recycler view
+         ExerciseFragmentAdapter myAdapter = new ExerciseFragmentAdapter(dataSets, getActivity(), this);     // or use requireActivity() in "this"
+         recyclerView.setAdapter(myAdapter);
+
+        //
+        addExerciseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentAdd = new Intent(getContext(), ExerciseDatabase.class);
+                startActivity(intentAdd);
+            }
+        });
     }
 }

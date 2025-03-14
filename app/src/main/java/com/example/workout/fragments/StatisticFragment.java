@@ -12,19 +12,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.graphics.Color;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
-import com.github.mikephil.charting.charts.BarChart;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
+import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -32,6 +32,8 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import com.example.workout.database.DBHelper;
+import com.example.workout.fragments.exercise.ExerciseDataSet;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StatisticFragment#newInstance} factory method to
@@ -99,77 +101,83 @@ public class StatisticFragment extends Fragment {
         barChart = view.findViewById(R.id.barChart);
         viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
 
+        // Get the ExerciseDataSet from the database
+        DBHelper db = new DBHelper(getContext(), "exerciseDB", null, 1);
+        List<ExerciseDataSet> exercises = db.getAllExercises();
+
+        // Store Exercise Data (Muscle Group specificly) into a map
+        Map<String, Integer> muscleGroupCount = new HashMap<>();
+        for (ExerciseDataSet exercise : exercises) {
+            String muscle = exercise.getMuscleGroup();
+            muscleGroupCount.put(muscle, muscleGroupCount.getOrDefault(muscle, 0) + 1); // If key not exist, value is 0, else add 1
+        }
+
         // Observe any changes in getMuscleGroupCount
-        viewModel.getMuscleGroupCount().observe(getViewLifecycleOwner(), muscleGroupMap -> {
-            // Check empty initially
-            if (muscleGroupMap == null || muscleGroupMap.isEmpty()) {
-                statView.setText("You haven't done anything");
-                return;
-            }
+        updateMuscleGroupStats(muscleGroupCount);
+        updateMuscleGroupChart(muscleGroupCount);
+    }
 
-            // Find the least worked muscle group in the muscleGroupCount Map in WorkoutViewModel (how this thing works: https://www.geeksforgeeks.org/comparator-comparingint-in-java-with-examples/)
-            Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
-                    muscleGroupMap.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
-            );
+    // Update Least Work on muscle group
+    void updateMuscleGroupStats(Map<String, Integer> muscleGroupMap) {
+        // Check empty initially
+        if (muscleGroupMap == null || muscleGroupMap.isEmpty()) {
+            statView.setText("You haven't done anything");
+            return;
+        }
 
-            // Total exercises done
-            int totalWorkouts = 0;
+        // Find the least worked muscle group
+        Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
+                muscleGroupMap.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
+        );
 
-            // Build the workout stats string
-            //StringBuilder result = new StringBuilder("Workout Stats:\n");
-            String stat = "Workout Stats: \n";
-            for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
-                // result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-                stat += "" + entry.getKey() + ": " + entry.getValue() + "\n";
-                totalWorkouts += entry.getValue();  // Sum up total workouts
-            }
+        // Total exercises done
+        int totalWorkouts = 0;
 
-            //result.append("\n💡 Suggestion: Train more ").append(leastWorkedMuscle.getKey());
-            stat += "\n💡 Suggestion: You should Train more " + leastWorkedMuscle.getKey();
-            //result.append("\nTotal Workouts: ").append(totalWorkouts);
-            stat += "\nTotal Workouts: " + totalWorkouts;
+        // Build the workout stats string
+        String stat = "Workout Stats: \n";
+        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
+            stat += "" + entry.getKey() + ": " + entry.getValue() + "\n";
+            totalWorkouts += entry.getValue();  // Sum up total workouts
+        }
 
-            // Update UI
-            // Log.d("test", "Train more: " + leastWorkedMuscle.getKey());
-            statView.setText(stat);
-        });
+        stat += "\n💡 Suggestion: You should train more " + leastWorkedMuscle.getKey();
+        stat += "\nTotal Workouts: " + totalWorkouts;
 
-        // https://github.com/PhilJay/MPAndroidChart?tab=readme-ov-file#documentation Example: https://www.youtube.com/watch?v=zH9-CvJT8II
-        viewModel.getMuscleGroupCount().observe(getViewLifecycleOwner(), muscleGroupMap -> {
-            // Declare some variables for the charts
-            List<BarEntry> entries = new ArrayList<>();
-            ArrayList<String> labels = new ArrayList<>();
-            int index = 0;
+        // Update UI
+        statView.setText(stat);
+    }
 
-            // Iterate the muscle group map to BarChart variables
-            for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
-                entries.add(new BarEntry(index, entry.getValue()));
-                labels.add(entry.getKey());  // Store muscle group names
-                index++;
-            }
+    // https://github.com/PhilJay/MPAndroidChart?tab=readme-ov-file#documentation Example: https://www.youtube.com/watch?v=zH9-CvJT8II
+    void updateMuscleGroupChart(Map<String, Integer> muscleGroupMap) {
+        // Declare some variables for the chart
+        List<BarEntry> entries = new ArrayList<>();
+        ArrayList<String> labels = new ArrayList<>();
+        int index = 0;
 
-            // Set up the chart based on the variables
-            BarDataSet dataSet = new BarDataSet(entries, "Muscle Groups Charts");
-            BarData barData = new BarData(dataSet);
-            barChart.setData(barData);
-            barChart.getDescription().setEnabled(false);    // disable that weird description thing below
+        // Iterate the muscle group map to BarChart variables
+        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
+            entries.add(new BarEntry(index, entry.getValue()));
+            labels.add(entry.getKey());  // Store muscle group names
+            index++;
+        }
 
-            // Customize Chart appearance
-            dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-            dataSet.setValueTextColor(Color.BLACK);
-            dataSet.setValueTextSize(18f);
-            // Set Muscle Group name below each bar (https://weeklycoding.com/mpandroidchart-documentation/xaxis/)
-            XAxis xAxis = barChart.getXAxis();
-            xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-            xAxis.setTextSize(10f);
-            xAxis.setDrawAxisLine(true);
-            xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));   // Set muscle group names on X-axis
-            xAxis.setGranularity(1f);                                       // Avoid dup description
-        });
+        // Set up the chart based on the variables
+        BarDataSet dataSet = new BarDataSet(entries, "Muscle Groups Charts");
+        BarData barData = new BarData(dataSet);
+        barChart.setData(barData);
+        barChart.getDescription().setEnabled(false);    // disable that weird description thing below
 
-        // Observe workout count (Need data from StartFragment maybe)
-        viewModel.getWorkoutCount().observe(getViewLifecycleOwner(), count -> {
-            workoutCount.setText("Total Workouts: " + count);
-        });
+        // Customize Chart appearance
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextSize(18f);
+
+        // Set Muscle Group name below each bar
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(10f);
+        xAxis.setDrawAxisLine(true);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));   // Set muscle group names on X-axis
+        xAxis.setGranularity(1f);                                       // Avoid duplicate labels
     }
 }
