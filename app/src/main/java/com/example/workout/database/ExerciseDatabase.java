@@ -1,5 +1,6 @@
 package com.example.workout.database;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -60,6 +61,8 @@ public class ExerciseDatabase extends AppCompatActivity {
                     titleText.setText("");
                     descText.setText("");
                     muscleText.setText("");
+
+                    //sendUpdateIntent("ADD");  // **Send update to ExerciseListFragment**
                 }
             }
         });
@@ -92,6 +95,7 @@ public class ExerciseDatabase extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.deleteData(titleText.getText().toString());
+                //sendUpdateIntent("DELETE");
             }
         });
 
@@ -99,7 +103,8 @@ public class ExerciseDatabase extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 db.deleteAllExercises();
-                return false;
+                //sendUpdateIntent("DELETE_ALL");
+                return true;
             }
         });
 
@@ -110,7 +115,16 @@ public class ExerciseDatabase extends AppCompatActivity {
                 String description = descText.getText().toString();
 
                 long rowInfo = db.updateData(title, description);
+//                if (rowInfo > 0) {
+//                    sendUpdateIntent("UPDATE");
+//                }
             }
         });
     }
+
+//    void sendUpdateIntent(String actionType) {
+//        Intent intent = new Intent();
+//        intent.putExtra("UPDATE_TYPE", actionType);
+//        setResult(RESULT_OK, intent);
+//    }
 }
