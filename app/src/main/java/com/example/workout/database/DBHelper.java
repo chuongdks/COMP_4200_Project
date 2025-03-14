@@ -25,8 +25,12 @@ public class DBHelper extends SQLiteOpenHelper {
     // method is called when the database is created for the first time
     @Override
     public void onCreate(SQLiteDatabase db) {
+        // Table for List of exercise
         String query = "CREATE TABLE exercise (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image INTEGER, description TEXT, muscle_group TEXT)";
         db.execSQL(query);
+        // Table for Selected exercise
+        String selectedExerciseQuery = "CREATE TABLE SelectedExercise (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, image INTEGER, description TEXT, muscle_group TEXT)";
+        db.execSQL(selectedExerciseQuery);
     }
 
     // method is called when the database needs to be upgrade to a new version
@@ -38,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // recreate the db
         onCreate(db);
     }
+
+    /*CREATE*/
     // method to Insert a new row into the "course" table with a given title and desc
     public long addData(String titleInput, String description, String muscle) {
         SQLiteDatabase db = getWritableDatabase();
@@ -63,7 +69,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.insert("exercise", null, contentValues);
     }
 
-    // Retrieve all exercises and return by List
+    // method to add selected exercise to the SelectedExercise db
+    public long addSelectedExercise(String titleInput, String description, String muscle) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put("name", titleInput);                                 // !!! The KEY MUST MATCH the attribute name
+        contentValues.put("description", description);
+        contentValues.put("muscle_group", muscle);
+
+        return db.insert("SelectedExercise", null, contentValues);    // return as long becuz it will return table info when it does the operation
+    }
+
+    /*READ*/
+    // Retrieve all exercises from "exercise" db and return by List
     public List<ExerciseDataSet> getAllExercises() {
         List<ExerciseDataSet> exercises = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -82,13 +101,33 @@ public class DBHelper extends SQLiteOpenHelper {
         return exercises;
     }
 
-    // method to Fetch all rows from table and return a cursor pointing to the result set
+    // method to Fetch all rows from "exercise" table and return a cursor pointing to the result set
     public Cursor displayData() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM exercise", null);
         return cursor;  // return cursor pointing to the result set (If cursor 0, nothing in db)
     }
 
+    // Retrieve all exercises from "SelectedExercise" db and return by List
+    public List<ExerciseDataSet> getAllSelectedExercises() {
+        List<ExerciseDataSet> exercises = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM SelectedExercise", null);
+
+        while (cursor.moveToNext()) {
+            ExerciseDataSet exercise = new ExerciseDataSet(
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getString(3),
+                    cursor.getString(4)
+            );
+            exercises.add(exercise);
+        }
+        cursor.close();
+        return exercises;
+    }
+
+    /*DELETE*/
     // method to Delete a row from the table using given title
     public Cursor deleteData(String muscleInput) {
         SQLiteDatabase db = getReadableDatabase();
@@ -102,13 +141,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;  // return cursor pointing to the result set (If cursor 0, nothing in db)
     }
 
-    // Nuke the database
+    // Nuke the "exercise" database
     public void deleteAllExercises() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM exercise");
         db.execSQL("DELETE FROM sqlite_sequence WHERE name='exercise'"); // Reset ID count
     }
 
+    // Nuke the "Selectec Exercise" database
+    public void deleteAllSelectedExercises() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM SelectedExercise");
+        db.execSQL("DELETE FROM sqlite_sequence WHERE name='SelectedExercise'"); // Reset ID count
+    }
+
+    /*UPDATE*/
     // method to Update the "description" column using given muscle group
     public long updateData(String muscleInput, String description) {
         SQLiteDatabase db = getWritableDatabase();

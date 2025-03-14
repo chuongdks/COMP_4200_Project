@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
+import com.example.workout.database.DBHelper;
 import com.example.workout.fragments.exercise.activities.ExerciseDetailActivity;
 import java.util.ArrayList;
 
@@ -53,11 +54,15 @@ public class ExerciseFragmentAdapter extends RecyclerView.Adapter<ExerciseFragme
         holder.cardVIew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Store the selected exercise inside the viewModel
+                // Store the selected exercise inside the viewModel (View Model Method)
                 viewModel.setSelectedExercise(data);
                 viewModel.addExerciseToMuscleMap(data);
 
-                // Toast msg
+                // Store the selected exercise inside the viewModel (Database Method)
+                DBHelper db = new DBHelper(context, "selectedExerciseDB", null, 1);
+                db.addSelectedExercise(data.getName(), data.getDescription(), data.getMuscleGroup());
+
+                // Toast msg (Debugging)
                 String msg = "You have added " + (position + 1) + " " + data.getName();
                 Toast.makeText(context.getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }

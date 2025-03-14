@@ -99,11 +99,11 @@ public class StatisticFragment extends Fragment {
         statView = view.findViewById(R.id.tv_stat);
         workoutCount = view.findViewById(R.id.tv_workout_count);
         barChart = view.findViewById(R.id.barChart);
-        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+        // viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);           // View Model Method (not used anymore)
 
         // Get the ExerciseDataSet from the database
-        DBHelper db = new DBHelper(getContext(), "exerciseDB", null, 1);
-        List<ExerciseDataSet> exercises = db.getAllExercises();
+        DBHelper db = new DBHelper(getContext(), "selectedExerciseDB", null, 1);
+        List<ExerciseDataSet> exercises = db.getAllSelectedExercises();                             // get all selected exercise in a List
 
         // Store Exercise Data (Muscle Group specificly) into a map
         Map<String, Integer> muscleGroupCount = new HashMap<>();
