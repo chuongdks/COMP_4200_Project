@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.graphics.Color;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
-import com.example.workout.activities.exercise.ExerciseListActivity;
 import com.github.mikephil.charting.charts.BarChart;
 
 import java.util.ArrayList;
@@ -117,18 +116,22 @@ public class StatisticFragment extends Fragment {
             int totalWorkouts = 0;
 
             // Build the workout stats string
-            StringBuilder result = new StringBuilder("Workout Stats:\n");
+            //StringBuilder result = new StringBuilder("Workout Stats:\n");
+            String stat = "Workout Stats: \n";
             for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
-                result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                // result.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                stat += "" + entry.getKey() + ": " + entry.getValue() + "\n";
                 totalWorkouts += entry.getValue();  // Sum up total workouts
             }
 
-            result.append("\n💡 Suggestion: Train more ").append(leastWorkedMuscle.getKey());
-            result.append("\nTotal Workouts: ").append(totalWorkouts);
+            //result.append("\n💡 Suggestion: Train more ").append(leastWorkedMuscle.getKey());
+            stat += "\n💡 Suggestion: You should Train more " + leastWorkedMuscle.getKey();
+            //result.append("\nTotal Workouts: ").append(totalWorkouts);
+            stat += "\nTotal Workouts: " + totalWorkouts;
 
             // Update UI
-            Log.d("test", "Train more: " + result.toString());
-            statView.setText(result.toString());
+            // Log.d("test", "Train more: " + leastWorkedMuscle.getKey());
+            statView.setText(stat);
         });
 
         // https://github.com/PhilJay/MPAndroidChart?tab=readme-ov-file#documentation Example: https://www.youtube.com/watch?v=zH9-CvJT8II
