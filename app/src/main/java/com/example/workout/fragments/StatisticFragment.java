@@ -91,93 +91,93 @@ public class StatisticFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_statistic, container, false);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // Assign View by ID
-        statView = view.findViewById(R.id.tv_stat);
-        workoutCount = view.findViewById(R.id.tv_workout_count);
-        barChart = view.findViewById(R.id.barChart);
-        // viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);           // View Model Method (not used anymore)
-
-        // Get the ExerciseDataSet from the database
-        DBHelper db = new DBHelper(getContext(), "selectedExerciseDB", null, 1);
-        List<ExerciseDataSet> exercises = db.getAllSelectedExercises();                             // get all selected exercise in a List
-
-        // Store Exercise Data (Muscle Group specificly) into a map
-        Map<String, Integer> muscleGroupCount = new HashMap<>();
-        for (ExerciseDataSet exercise : exercises) {
-            String muscle = exercise.getMuscleGroup();
-            muscleGroupCount.put(muscle, muscleGroupCount.getOrDefault(muscle, 0) + 1); // If key not exist, value is 0, else add 1
-        }
-
-        // Observe any changes in getMuscleGroupCount
-        updateMuscleGroupStats(muscleGroupCount);
-        updateMuscleGroupChart(muscleGroupCount);
-    }
-
-    // Update Least Work on muscle group
-    void updateMuscleGroupStats(Map<String, Integer> muscleGroupMap) {
-        // Check empty initially
-        if (muscleGroupMap == null || muscleGroupMap.isEmpty()) {
-            statView.setText("You haven't done anything");
-            return;
-        }
-
-        // Find the least worked muscle group
-        Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
-                muscleGroupMap.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
-        );
-
-        // Total exercises done
-        int totalWorkouts = 0;
-
-        // Build the workout stats string
-        String stat = "Workout Stats: \n";
-        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
-            stat += "" + entry.getKey() + ": " + entry.getValue() + "\n";
-            totalWorkouts += entry.getValue();  // Sum up total workouts
-        }
-
-        stat += "\n💡 Suggestion: You should train more " + leastWorkedMuscle.getKey();
-        stat += "\nTotal Workouts: " + totalWorkouts;
-
-        // Update UI
-        statView.setText(stat);
-    }
-
-    // https://github.com/PhilJay/MPAndroidChart?tab=readme-ov-file#documentation Example: https://www.youtube.com/watch?v=zH9-CvJT8II
-    void updateMuscleGroupChart(Map<String, Integer> muscleGroupMap) {
-        // Declare some variables for the chart
-        List<BarEntry> entries = new ArrayList<>();
-        ArrayList<String> labels = new ArrayList<>();
-        int index = 0;
-
-        // Iterate the muscle group map to BarChart variables
-        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
-            entries.add(new BarEntry(index, entry.getValue()));
-            labels.add(entry.getKey());  // Store muscle group names
-            index++;
-        }
-
-        // Set up the chart based on the variables
-        BarDataSet dataSet = new BarDataSet(entries, "Muscle Groups Charts");
-        BarData barData = new BarData(dataSet);
-        barChart.setData(barData);
-        barChart.getDescription().setEnabled(false);    // disable that weird description thing below
-
-        // Customize Chart appearance
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        dataSet.setValueTextColor(Color.BLACK);
-        dataSet.setValueTextSize(18f);
-
-        // Set Muscle Group name below each bar
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTextSize(10f);
-        xAxis.setDrawAxisLine(true);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));   // Set muscle group names on X-axis
-        xAxis.setGranularity(1f);                                       // Avoid duplicate labels
-    }
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        // Assign View by ID
+//        statView = view.findViewById(R.id.tv_stat);
+//        workoutCount = view.findViewById(R.id.tv_workout_count);
+//        barChart = view.findViewById(R.id.barChart);
+//        // viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);           // View Model Method (not used anymore)
+//
+//        // Get the ExerciseDataSet from the database
+//        DBHelper db = new DBHelper(getContext(), "selectedExerciseDB", null, 1);
+//        List<ExerciseDataSet> exercises = db.getAllSelectedExercises();                             // get all selected exercise in a List
+//
+//        // Store Exercise Data (Muscle Group specificly) into a map
+//        Map<String, Integer> muscleGroupCount = new HashMap<>();
+//        for (ExerciseDataSet exercise : exercises) {
+//            String muscle = exercise.getMuscleGroup();
+//            muscleGroupCount.put(muscle, muscleGroupCount.getOrDefault(muscle, 0) + 1); // If key not exist, value is 0, else add 1
+//        }
+//
+//        // Observe any changes in getMuscleGroupCount
+//        updateMuscleGroupStats(muscleGroupCount);
+//        updateMuscleGroupChart(muscleGroupCount);
+//    }
+//
+//    // Update Least Work on muscle group
+//    void updateMuscleGroupStats(Map<String, Integer> muscleGroupMap) {
+//        // Check empty initially
+//        if (muscleGroupMap == null || muscleGroupMap.isEmpty()) {
+//            statView.setText("You haven't done anything");
+//            return;
+//        }
+//
+//        // Find the least worked muscle group
+//        Map.Entry<String, Integer> leastWorkedMuscle = Collections.min(
+//                muscleGroupMap.entrySet(), Comparator.comparingInt(Map.Entry::getValue)
+//        );
+//
+//        // Total exercises done
+//        int totalWorkouts = 0;
+//
+//        // Build the workout stats string
+//        String stat = "Workout Stats: \n";
+//        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
+//            stat += "" + entry.getKey() + ": " + entry.getValue() + "\n";
+//            totalWorkouts += entry.getValue();  // Sum up total workouts
+//        }
+//
+//        stat += "\n💡 Suggestion: You should train more " + leastWorkedMuscle.getKey();
+//        stat += "\nTotal Workouts: " + totalWorkouts;
+//
+//        // Update UI
+//        statView.setText(stat);
+//    }
+//
+//    // https://github.com/PhilJay/MPAndroidChart?tab=readme-ov-file#documentation Example: https://www.youtube.com/watch?v=zH9-CvJT8II
+//    void updateMuscleGroupChart(Map<String, Integer> muscleGroupMap) {
+//        // Declare some variables for the chart
+//        List<BarEntry> entries = new ArrayList<>();
+//        ArrayList<String> labels = new ArrayList<>();
+//        int index = 0;
+//
+//        // Iterate the muscle group map to BarChart variables
+//        for (Map.Entry<String, Integer> entry : muscleGroupMap.entrySet()) {
+//            entries.add(new BarEntry(index, entry.getValue()));
+//            labels.add(entry.getKey());  // Store muscle group names
+//            index++;
+//        }
+//
+//        // Set up the chart based on the variables
+//        BarDataSet dataSet = new BarDataSet(entries, "Muscle Groups Charts");
+//        BarData barData = new BarData(dataSet);
+//        barChart.setData(barData);
+//        barChart.getDescription().setEnabled(false);    // disable that weird description thing below
+//
+//        // Customize Chart appearance
+//        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+//        dataSet.setValueTextColor(Color.BLACK);
+//        dataSet.setValueTextSize(18f);
+//
+//        // Set Muscle Group name below each bar
+//        XAxis xAxis = barChart.getXAxis();
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+//        xAxis.setTextSize(10f);
+//        xAxis.setDrawAxisLine(true);
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));   // Set muscle group names on X-axis
+//        xAxis.setGranularity(1f);                                       // Avoid duplicate labels
+//    }
 }

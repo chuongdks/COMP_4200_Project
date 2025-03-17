@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             else if (itemId == R.id.stat_menu) {
                 selectedFragment = new StatisticFragment();
             }
-            else if (itemId == R.id.start_menu) {
+            else if (itemId == R.id.workout_menu) {
                 selectedFragment = new StartFragment();
             }
             else if (itemId == R.id.list_menu) {

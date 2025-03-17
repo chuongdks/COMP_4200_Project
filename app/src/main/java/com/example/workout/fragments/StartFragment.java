@@ -74,15 +74,15 @@ public class StartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Assign View by ID
-        exerciseName = view.findViewById(R.id.exercise_name);
-        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
-
-        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
-            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
-            if (exercise != null) {
-                exerciseName.setText("Selected Exercise: " + exercise.getName() + "\nDescription: " + exercise.getDescription());
-            }
-        });
+//        // Assign View by ID
+//        exerciseName = view.findViewById(R.id.exercise_name);
+//        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+//
+//        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
+//            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
+//            if (exercise != null) {
+//                exerciseName.setText("Selected Exercise: " + exercise.getName() + "\nDescription: " + exercise.getDescription());
+//            }
+//        });
     }
 }

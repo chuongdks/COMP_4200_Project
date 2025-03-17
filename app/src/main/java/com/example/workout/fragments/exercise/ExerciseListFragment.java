@@ -81,62 +81,61 @@ public class ExerciseListFragment extends Fragment {
     }
 
     // https://stackoverflow.com/questions/53579162/cannot-resolve-findviewbyid-in-fragment and https://www.repeato.app/how-to-use-findviewbyid-in-a-fragment/
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        // assign Recycler view by id and set the Layout
-        recyclerView = view.findViewById(R.id.rec_view);
-        addExerciseButton = view.findViewById(R.id.fab_add);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        // Create an exercise database
-        db = new DBHelper(getContext(), "exerciseDB", null, 1);
-        db.getWritableDatabase();
-
-        refreshExerciseList();
-
-        // Intent: https://stackoverflow.com/questions/20114485/use-onactivityresult-android
-        addExerciseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentAdd = new Intent(getContext(), ExerciseDatabase.class);
-                startActivity(intentAdd);
-            }
-        });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        refreshExerciseList();
-    }
-
-    // refresh the recyclerView Adapter
-    void refreshExerciseList() {
-        dataSets.clear();
-        dataSets.addAll(db.getAllExercises());
-
-        // Check if db is empty by checking dataSets
-        if (dataSets.isEmpty()) {
-            // The default Exercise datasets
-            dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
-            dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
-            dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
-
-            // save to database if empty
-            for (ExerciseDataSet exercise : dataSets) {
-                db.addExercise(exercise);
-            }
-        }
-
-        // Set Adapter for Recycler view
-        if (myAdapter == null) {
-            myAdapter = new ExerciseFragmentAdapter(dataSets, getActivity(), this);
-            recyclerView.setAdapter(myAdapter);
-        }
-        else {
-            myAdapter.notifyDataSetChanged();
-        }
-    }
+//    @Override
+//    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        // assign Recycler view by id and set the Layout
+//        recyclerView = view.findViewById(R.id.rec_view);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//
+//        // Create an exercise database
+//        db = new DBHelper(getContext(), "exerciseDB", null, 1);
+//        db.getWritableDatabase();
+//
+//        refreshExerciseList();
+//
+//        // Intent: https://stackoverflow.com/questions/20114485/use-onactivityresult-android
+//        addExerciseButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentAdd = new Intent(getContext(), ExerciseDatabase.class);
+//                startActivity(intentAdd);
+//            }
+//        });
+//    }
+//
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        refreshExerciseList();
+//    }
+//
+//    // refresh the recyclerView Adapter
+//    void refreshExerciseList() {
+//        dataSets.clear();
+//        dataSets.addAll(db.getAllExercises());
+//
+//        // Check if db is empty by checking dataSets
+//        if (dataSets.isEmpty()) {
+//            // The default Exercise datasets
+//            dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
+//            dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+//            dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
+//
+//            // save to database if empty
+//            for (ExerciseDataSet exercise : dataSets) {
+//                db.addExercise(exercise);
+//            }
+//        }
+//
+//        // Set Adapter for Recycler view
+//        if (myAdapter == null) {
+//            myAdapter = new ExerciseFragmentAdapter(dataSets, getActivity(), this);
+//            recyclerView.setAdapter(myAdapter);
+//        }
+//        else {
+//            myAdapter.notifyDataSetChanged();
+//        }
+//    }
 }
