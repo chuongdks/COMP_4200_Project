@@ -11,7 +11,7 @@ import com.example.workout.fragments.exercise.ExerciseDataSet;
 import java.util.HashMap;
 import java.util.Map;
 
-// https://developer.android.com/guide/fragments/communicate#viewmodel
+// https://developer.android.com/guide/fragments/communicate#viewmodel OLD METHOD TO SHARE DATA BTW FRAGMENT. CLASS IS NOT USED UNLESS U HATE URSELF
 public class WorkoutViewModel extends ViewModel {
     // Mutable Live Data for Start Fragment
     private final MutableLiveData<ExerciseDataSet> selectedExercise = new MutableLiveData<>();      // Selected exercise
