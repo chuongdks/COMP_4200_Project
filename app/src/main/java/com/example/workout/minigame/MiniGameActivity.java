@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class MiniGameActivity extends AppCompatActivity {
     // Declare view for this scope
-    Button buttonUp, buttonDown, buttonLeft, buttonRight, buttonCancel, buttonOK;
+    Button buttonUp, buttonDown, buttonLeft, buttonRight, buttonCancel;
     TextView tvStrategem, tvInput, tvTargetStrategem;
     // Other variable
     ArrayList<String> inputSequence = new ArrayList<>();
@@ -29,7 +29,6 @@ public class MiniGameActivity extends AppCompatActivity {
     SoundPool soundPool;
     int soundButton, soundSuccess, soundFail, soundConfirm;
     boolean gameActive = false;
-    // boolean validStrategem = false;
     String targetSequence = "";
 
     @Override
@@ -48,8 +47,6 @@ public class MiniGameActivity extends AppCompatActivity {
         buttonDown = findViewById(R.id.bt_down);
         buttonLeft = findViewById(R.id.bt_left);
         buttonRight = findViewById(R.id.bt_right);
-        buttonCancel = findViewById(R.id.bt_cancel);
-        buttonOK = findViewById(R.id.bt_ok);
         tvStrategem = findViewById(R.id.tv_strategem);
         tvInput = findViewById(R.id.tv_input);
         tvTargetStrategem = findViewById(R.id.tv_target);
@@ -66,7 +63,11 @@ public class MiniGameActivity extends AppCompatActivity {
         strategemMap.put("up right down down down", "500 KG Bomb");
         strategemMap.put("up down right left", "Reinforcement");
         strategemMap.put("right down up right down", "Orbital Laser");
-        strategemMap.put("down up right down up right down up", "Hell bomb");
+        strategemMap.put("down up right down up left down up", "Hell bomb");
+        strategemMap.put("down up up down up", "Jump pack");
+        strategemMap.put("left down right up left down down", "Exo suit");
+        strategemMap.put("down left down up up right", "Auto Cannon");
+        // strategemMap.put("", "Jump pack");
 
         startNewGame(); // Start the first game
 
@@ -99,32 +100,6 @@ public class MiniGameActivity extends AppCompatActivity {
                 handleInput("right");
             }
         });
-
-        // Cancel the strategem
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetInput();
-            }
-        });
-
-//        // Confirm Button (Use for Strategem App)
-//        buttonOK.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (validStrategem) {
-//                    // Play sounds depend on strategem value using switch case
-//                    soundPool.play(soundConfirm, 1, 1, 0, 0, 1);
-//                    inputSequence.clear();
-//                    tvInput.setText("");
-//                    tvStrategem.setText("");
-//                    validStrategem = false;
-//                }
-//                else {
-//                    soundPool.play(soundFail, 1, 1, 0, 0, 1);
-//                }
-//            }
-//        });
     }
 
     // Start a new round by select random Strategem
@@ -154,18 +129,6 @@ public class MiniGameActivity extends AppCompatActivity {
 
         // Check the input during gameplay
         checkInput();
-
-//        // Check if the sequence match the "strategemMap" Key value (Uncomment for strategem app)
-//        if (strategemMap.containsKey(currentSequence)) {
-//            tvStrategem.setText(strategemMap.get(currentSequence)); // display Strategem name
-//            soundPool.play(soundSuccess, 1, 1, 0, 0, 1);
-//            inputSequence.clear();  // Empty input sequence for the next one
-//            tvInput.setText("");
-//            // validStrategem = true;
-//        }
-//        else {
-//            //
-//        }
     }
 
     // Reset input sequence

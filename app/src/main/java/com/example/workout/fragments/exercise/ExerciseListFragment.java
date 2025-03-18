@@ -8,8 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
@@ -29,7 +31,7 @@ public class ExerciseListFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<ExerciseDataSet> dataSets = new ArrayList<>();
     WorkoutViewModel viewModel;
-    FloatingActionButton addExerciseButton;
+    ImageView addExerciseButton;
     ExerciseFragmentAdapter myAdapter;
     DBHelper db;
 
@@ -100,6 +102,16 @@ public class ExerciseListFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Make button brighter
+                view.setAlpha(1.0f); // Fully visible
+                // Small delay to restore normal appearance
+                view.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setAlpha(0.7f); // Dim effect after click
+                    }
+                }, 100); // 200ms delay
+
                 Intent intentAdd = new Intent(getContext(), ExerciseDatabaseActivity.class);
                 startActivity(intentAdd);
             }
@@ -120,9 +132,9 @@ public class ExerciseListFragment extends Fragment {
         // Check if db is empty by checking dataSets
         if (dataSets.isEmpty()) {
             // The default Exercise datasets
-            dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.image1, "A strength training exercise that targets the biceps.", "Biceps"));
-            dataSets.add(new ExerciseDataSet("Squat", R.drawable.image2, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
-            dataSets.add(new ExerciseDataSet("Push-up", R.drawable.image3, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
+            dataSets.add(new ExerciseDataSet("Bicep Curl", R.drawable.exercise_machine_photo, "A strength training exercise that targets the biceps.", "Biceps"));
+            dataSets.add(new ExerciseDataSet("Squat", R.drawable.hiit_photo, "A lower body exercise that targets the quadriceps and glutes.", "Legs"));
+            dataSets.add(new ExerciseDataSet("Push-up", R.drawable.sitting_bench, "A bodyweight exercise that targets the chest and triceps.", "Chest"));
 
             // save to database if empty
             for (ExerciseDataSet exercise : dataSets) {

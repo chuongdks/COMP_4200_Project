@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.graphics.Color;
 import com.example.workout.R;
@@ -24,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.example.workout.database.ExerciseDatabaseActivity;
+import com.example.workout.minigame.MiniGameActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -40,9 +43,9 @@ import com.example.workout.fragments.exercise.ExerciseDataSet;
  * create an instance of this fragment.
  */
 public class StatisticFragment extends Fragment {
-    WorkoutViewModel viewModel;
     TextView statView, workoutCount;
     BarChart barChart;
+    Button resetStat;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -99,7 +102,7 @@ public class StatisticFragment extends Fragment {
         statView = view.findViewById(R.id.tv_stat);
         // workoutCount = view.findViewById(R.id.tv_workout_count);
         barChart = view.findViewById(R.id.barChart);
-        // viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);           // View Model Method (not used anymore)
+        resetStat = view.findViewById(R.id.bt_reset_stat);
 
         // Get the ExerciseDataSet from the database
         DBHelper db = new DBHelper(getContext(), "selectedExerciseDB", null, 1);
@@ -115,6 +118,31 @@ public class StatisticFragment extends Fragment {
         // Observe any changes in getMuscleGroupCount
         updateMuscleGroupStats(muscleGroupCount);
         updateMuscleGroupChart(muscleGroupCount);
+
+        //
+        resetStat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.deleteAllSelectedExercises();
+
+                // Refresh UI
+                updateMuscleGroupStats(new HashMap<>());  // Empty data to reset stats
+                updateMuscleGroupChart(new HashMap<>());  // Empty data to reset chart
+
+                // Refresh the chart view
+                barChart.invalidate();
+            }
+        });
+
+        // Start the minigame: Strategem Hero!
+        resetStat.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Intent intentGame = new Intent(getContext(), MiniGameActivity.class);
+                startActivity(intentGame);
+                return false;
+            }
+        });
     }
 
     // Update Least Work on muscle group

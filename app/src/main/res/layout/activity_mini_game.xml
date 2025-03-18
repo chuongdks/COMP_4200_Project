@@ -9,21 +9,21 @@
 
     <Button
         android:id="@+id/bt_up"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="113dp"
+        android:soundEffectsEnabled="false"
         android:text="Up"
         app:layout_constraintBottom_toTopOf="@+id/bt_down"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.553"
-        android:soundEffectsEnabled="false"/>
+        app:layout_constraintVertical_bias="0.685" />
 
     <Button
         android:id="@+id/bt_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="113dp"
         android:layout_marginStart="52dp"
         android:soundEffectsEnabled="false"
         android:text="Left"
@@ -34,27 +34,27 @@
 
     <Button
         android:id="@+id/bt_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="113dp"
         android:layout_marginEnd="52dp"
+        android:soundEffectsEnabled="false"
         android:text="Right"
         app:layout_constraintBottom_toTopOf="@+id/bt_down"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bt_up"
-        app:layout_constraintVertical_bias="0.502"
-        android:soundEffectsEnabled="false"/>
+        app:layout_constraintVertical_bias="0.502" />
 
     <Button
         android:id="@+id/bt_down"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="113dp"
         android:layout_marginBottom="88dp"
+        android:soundEffectsEnabled="false"
         android:text="Down"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        android:soundEffectsEnabled="false"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_strategem"
@@ -63,7 +63,7 @@
         android:layout_marginTop="44dp"
         android:gravity="center"
         android:text="Strategem App"
-        android:textSize="48sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -77,32 +77,12 @@
         android:layout_marginBottom="16dp"
         android:gravity="center"
         android:text=""
-        android:textSize="48sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/bt_up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bt_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginBottom="32dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/bt_ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="32dp"
-        android:text="OK"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tv_target"
@@ -110,7 +90,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="Target"
-        android:textSize="48sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/tv_input"
         app:layout_constraintEnd_toEndOf="parent"
