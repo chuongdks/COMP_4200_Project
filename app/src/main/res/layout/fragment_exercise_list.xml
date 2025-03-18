@@ -60,15 +60,30 @@
             app:layout_constraintTop_toTopOf="@+id/view_add" />
 
         <ImageView
-            android:id="@+id/button_add"
+            android:id="@+id/fab_add"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:src="@drawable/icon_add"
+            android:clickable="true"
             app:layout_constraintBottom_toBottomOf="@+id/view_add"
             app:layout_constraintEnd_toEndOf="@+id/view_add"
             app:layout_constraintStart_toStartOf="@+id/view_add"
             app:layout_constraintTop_toTopOf="@+id/view_add"
             app:layout_constraintVertical_bias="0.72" />
+
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab_add"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:clickable="true"-->
+<!--            android:src="@drawable/icon_add"-->
+<!--            tools:layout_editor_absoluteX="57dp"-->
+<!--            tools:layout_editor_absoluteY="135dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/view_add"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/view_add"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/view_add"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/view_add"-->
+<!--            app:layout_constraintVertical_bias="0.72" />-->
 
         <LinearLayout
             android:background="@drawable/style_view_grey"
@@ -83,10 +98,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_add">
 
-            <ListView
-                android:id="@+id/list_workout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

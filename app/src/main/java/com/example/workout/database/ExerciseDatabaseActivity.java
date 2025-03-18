@@ -1,6 +1,5 @@
 package com.example.workout.database;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.workout.R;
 
-public class ExerciseDatabase extends AppCompatActivity {
+public class ExerciseDatabaseActivity extends AppCompatActivity {
     Button addButton, editButton, deleteButton, displayButton;
     EditText titleText, descText, muscleText;
 
@@ -81,7 +80,7 @@ public class ExerciseDatabase extends AppCompatActivity {
                     }
                 }
 
-                AlertDialog.Builder alertMessage = new AlertDialog.Builder(ExerciseDatabase.this);
+                AlertDialog.Builder alertMessage = new AlertDialog.Builder(ExerciseDatabaseActivity.this);
                 alertMessage.setTitle("Database info");
                 alertMessage.setMessage(cursorInfo);
                 alertMessage.setCancelable(true);

@@ -16,7 +16,7 @@
             android:name=".minigame.MiniGameActivity"
             android:exported="false" />
         <activity
-            android:name=".database.ExerciseDatabase"
+            android:name=".database.ExerciseDatabaseActivity"
             android:exported="false" />
         <activity
             android:name=".activities.exercise.ExerciseListActivity"

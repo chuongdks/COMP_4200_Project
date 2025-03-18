@@ -21,7 +21,7 @@
     <string name="default_step">0000</string>
     <string name="default_calorie">000</string>
     <string name="unit_calorie">CAL</string>
-    <string name="workout">Workout</string>
+    <string name="workout">Workout Recommendation</string>
     <string name="heart">Heart rate</string>
     <string name="history">History</string>
     <string name="list">Program</string>

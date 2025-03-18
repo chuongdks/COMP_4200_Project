@@ -12,72 +12,86 @@
         android:background="@color/black"
         tools:context=".fragments.StatisticFragment">
 
-        <ImageView
-            android:id="@+id/image_user"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/icon_user_default"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_history_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/inter_black"
-            android:text="@string/history"
-            android:textColor="@color/textColor"
-            android:textSize="32sp"
-            app:layout_constraintStart_toEndOf="@+id/image_user"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/style_view_grey"
-            android:focusedMonthDateColor="@color/textColor"
-            android:unfocusedMonthDateColor="@color/black"
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:paddingTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_history_title" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/workout_section"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/style_view_grey"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/calendarView">
-
-            <TextView
-                android:id="@+id/text_title_section"
+<!--            Scroll View can only have 1 Child-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:fontFamily="@font/inter_bold"
-                android:text="@string/workout"
-                android:textColor="@color/textColor"
-                android:textSize="20sp" />
+                android:orientation="vertical">
 
-            <ListView
-                android:id="@+id/workout_detail"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/style_view_darkgrey" />
+                <ImageView
+                    android:id="@+id/image_user"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/icon_user_default" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/text_history_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/inter_black"
+                    android:text="@string/history"
+                    android:textColor="@color/textColor"
+                    android:textSize="32sp" />
+
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/style_view_grey"
+                    android:focusedMonthDateColor="@color/textColor"
+                    android:unfocusedMonthDateColor="@color/black" />
+
+                <LinearLayout
+                    android:id="@+id/workout_section"
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/style_view_grey"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_title_section"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/workout"
+                        android:textColor="@color/textColor"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/tv_stat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
+                </LinearLayout>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_marginTop="20dp" />
+
+            </LinearLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
