@@ -74,9 +74,11 @@ public class ExerciseDatabaseActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Waiting to display!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    while (cursor.moveToNext()) {
-                        cursorInfo += "\nTitle: " + cursor.getString(1) + " Description: " + cursor.getString(3)
-                        + " Muscle: " + cursor.getString(4);
+                    while (cursor.moveToNext())
+                    {
+                        cursorInfo += "\nTitle: " + cursor.getString(1) +
+                                      " Description: " + cursor.getString(3) +
+                                      " Muscle: " + cursor.getString(4);
                     }
                 }
 
@@ -99,6 +101,7 @@ public class ExerciseDatabaseActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 db.deleteAllExercises();
+                Toast.makeText(ExerciseDatabaseActivity.this, "DATABASE IMPLIED THE EXISTENCE OF DATACRINGE", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

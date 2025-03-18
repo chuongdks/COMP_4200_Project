@@ -1,8 +1,8 @@
 package com.example.workout.fragments.exercise;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-
+import android.widget.Toast;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
 import com.example.workout.database.DBHelper;
@@ -78,7 +77,7 @@ public class ExerciseListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_exercise, container, false); // fragment_exercise_list
+        return inflater.inflate(R.layout.fragment_exercise_list, container, false);     // fragment_exercise_list activity_exercise
     }
 
     // https://stackoverflow.com/questions/53579162/cannot-resolve-findviewbyid-in-fragment and https://www.repeato.app/how-to-use-findviewbyid-in-a-fragment/
@@ -87,8 +86,8 @@ public class ExerciseListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         // assign Recycler view by id and set the Layout
-        addExerciseButton = view.findViewById(R.id.fab_add);
         recyclerView = view.findViewById(R.id.rec_view);
+        addExerciseButton = view.findViewById(R.id.fab_add);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Create an exercise database

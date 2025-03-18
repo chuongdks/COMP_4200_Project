@@ -169,13 +169,14 @@ public class StatisticFragment extends Fragment {
 
         // Customize Chart appearance
         dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-        dataSet.setValueTextColor(Color.BLACK);
+        dataSet.setValueTextColor(Color.WHITE);
         dataSet.setValueTextSize(18f);
 
         // Set Muscle Group name below each bar
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setTextSize(10f);
+        xAxis.setTextColor(Color.WHITE);
         xAxis.setDrawAxisLine(true);
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));   // Set muscle group names on X-axis
         xAxis.setGranularity(1f);                                       // Avoid duplicate labels

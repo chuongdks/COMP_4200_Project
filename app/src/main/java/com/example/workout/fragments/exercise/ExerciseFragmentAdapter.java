@@ -2,6 +2,8 @@ package com.example.workout.fragments.exercise;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +57,8 @@ public class ExerciseFragmentAdapter extends RecyclerView.Adapter<ExerciseFragme
             @Override
             public void onClick(View v) {
                 // Store the selected exercise inside the viewModel (View Model Method)
-                viewModel.setSelectedExercise(data);
-                viewModel.addExerciseToMuscleMap(data);
+//                viewModel.setSelectedExercise(data);
+//                viewModel.addExerciseToMuscleMap(data);
 
                 // Store the selected exercise inside the viewModel (Database Method)
                 DBHelper db = new DBHelper(context, "selectedExerciseDB", null, 1);
