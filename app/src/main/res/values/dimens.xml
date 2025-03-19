@@ -1,3 +1,5 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_velocity">800dp</dimen>
+    <dimen name="item_touch_helper_swipe_escape_max_velocity">1500dp</dimen>
 </resources>

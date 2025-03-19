@@ -50,7 +50,15 @@ public class ExerciseFragmentAdapter extends RecyclerView.Adapter<ExerciseFragme
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ExerciseDataSet data = dataList.get(position);
-        holder.imageView.setImageResource(data.getImage());
+        
+        // Check if the image resource is valid before setting it
+        try {
+            holder.imageView.setImageResource(data.getImage());
+        } catch (Exception e) {
+            // If there's an error with the image resource, use a default icon
+            holder.imageView.setImageResource(R.drawable.icon_workout1);
+        }
+        
         holder.textView.setText(data.getName());
 
         holder.cardVIew.setOnClickListener(new View.OnClickListener() {
