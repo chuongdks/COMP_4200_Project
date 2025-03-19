@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="20dp"
+        android:background="@drawable/style_view_darkgrey"
         app:itemPaddingBottom="0dp"
         app:itemPaddingTop="0dp"
         app:labelVisibilityMode="unlabeled"
