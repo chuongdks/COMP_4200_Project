@@ -82,8 +82,9 @@
                         android:id="@+id/tv_stat"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/textColor"
-                        android:text="TextView" />
+                        android:paddingHorizontal="8dp"
+                        android:text="TextView"
+                        android:textColor="@color/textColor" />
 
                 </LinearLayout>
 
