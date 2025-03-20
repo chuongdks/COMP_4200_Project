@@ -36,4 +36,7 @@
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="new_plan">New plan</string>
+    <string name="notice_title">Tap to add exercise name</string>
+    <string name="notice_description">Tap to add exercise description</string>
+    <string name="notice_group">Tap to add muscle group</string>
 </resources>

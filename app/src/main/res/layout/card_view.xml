@@ -10,7 +10,7 @@
         android:id="@+id/card_view_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bgColor"
+        android:background="@drawable/style_view_darkgrey"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
