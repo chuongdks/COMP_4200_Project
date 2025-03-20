@@ -26,6 +26,7 @@
                 android:id="@+id/image_view"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
+                android:background="@drawable/style_view_darkgrey"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
