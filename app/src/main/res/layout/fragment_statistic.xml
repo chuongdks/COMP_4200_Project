@@ -59,9 +59,9 @@
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/style_view_grey"
                     android:dateTextAppearance="@style/CalendarDateTextAppearance"
+                    android:focusedMonthDateColor="@color/textColor"
                     android:selectedDateVerticalBar="@drawable/color_linear"
                     android:selectedWeekBackgroundColor="@drawable/color_linear"
-                    android:focusedMonthDateColor="@color/textColor"
                     android:unfocusedMonthDateColor="@color/hintColor" />
 
                 <LinearLayout
@@ -101,17 +101,24 @@
                     android:layout_height="350dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp" />
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/style_view_grey"
+                    android:padding="8dp" />
 
                 <Button
                     android:id="@+id/bt_reset_stat"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="56dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="16dp"
-                    android:text="Reset" />
+                    android:background="@drawable/style_button_linear"
+                    app:backgroundTint="@null"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="Reset"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </ScrollView>

@@ -5,39 +5,47 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.exercise.activities.ExerciseDetailActivity"
+    android:background="@color/bgColor"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="20dp"
+    tools:context=".fragments.exercise.activities.ExerciseDetailActivity">
 
 
     <ImageView
         android:id="@+id/img_detail"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:background="@drawable/style_view_grey"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/tv_detail_muscle_group"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter"
         android:text="TextView"
-        android:layout_marginTop="12dp"/>
+        android:textColor="@color/textColor"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/tv_detail_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter_bold"
         android:text="TextView"
+        android:textColor="@color/textColor"
         android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_detail_desc"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter"
         android:text="TextView"
-        android:textSize="17sp"
-        android:layout_marginTop="10dp"/>
+        android:textColor="@color/textColor"
+        android:textSize="17sp" />
 </LinearLayout>

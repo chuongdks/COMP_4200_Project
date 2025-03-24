@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bgColor">
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginTop="4dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_test"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_view_darkgrey"
+        app:cardBackgroundColor="@color/viewColor"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
@@ -19,14 +20,13 @@
             android:id="@+id/lin_card"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@drawable/style_view_grey"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/image_view"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
-                android:background="@drawable/style_view_darkgrey"
+                android:background="@color/viewColor2"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <TextView
