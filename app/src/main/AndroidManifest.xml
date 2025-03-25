@@ -39,8 +39,11 @@
         <activity
             android:name=".activities.MainActivity"
             android:exported="true">
+<<<<<<< HEAD
         <activity
                 android:name=".user.NotificationActivity" />
+=======
+>>>>>>> e83fd798ed9717b3cbd906194456091d06433d0b
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

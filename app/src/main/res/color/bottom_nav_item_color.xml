@@ -2,4 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="@color/textColor" android:state_checked="true" />
     <item android:color="@color/black" />
+<<<<<<< HEAD
+=======
+    <item android:color="@color/white" />
+>>>>>>> e83fd798ed9717b3cbd906194456091d06433d0b
 </selector> 

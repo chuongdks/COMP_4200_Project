@@ -8,6 +8,7 @@
     android:background="@color/bgColor"
     android:orientation="vertical"
     android:padding="8dp"
+
     tools:context=".user.NotificationActivity">
 
     <LinearLayout
