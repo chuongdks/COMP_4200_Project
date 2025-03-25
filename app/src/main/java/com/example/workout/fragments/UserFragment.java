@@ -1,5 +1,6 @@
 package com.example.workout.fragments;
 
+import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 
@@ -10,21 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.workout.R;
+import com.example.workout.activities.NotificationActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class UserFragment extends Fragment {
+    View view_notification_setting;
+    ImageView img_email, img_facebook;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,5 +77,18 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        view_notification_setting = view.findViewById(R.id.view_setting1);
+        img_email = view.findViewById(R.id.image_email);
+        img_facebook = view.findViewById(R.id.image_facebook);
+
+        view_notification_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intentAdd = new Intent(getContext(), NotificationActivity.class);
+                startActivity(intentAdd);
+            }
+        });
     }
 }

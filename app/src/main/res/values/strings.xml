@@ -39,5 +39,9 @@
     <string name="notice_title">Tap to add exercise name</string>
     <string name="notice_description">Tap to add exercise description</string>
     <string name="notice_group">Tap to add muscle group</string>
-
+    <string name="set_notification_set2">Remind me at</string>
+    <string name="home_slogan">Train Hard</string>
+    <string name="home_slogan2">Play Smart</string>
+    <string name="contact">Contact Us</string>
+    <string name="time">Time</string>
 </resources>

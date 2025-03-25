@@ -11,11 +11,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.workout.R;
 
 public class NotificationActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-
+        setContentView(R.layout.activity_notification); // Ensure this line is present
     }
 }
