@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">WorkOut</string>
+    <string name="login">Login</string>
+    <string name="login2">Already have an account?</string>
+    <string name="register">Register</string>
+    <string name="register2">Don\'t have an account?</string>
+    <string name="slogan">Your Body\nYour Rules\nYour Best Self</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="verify">Verification</string>
+    <string name="explore">Explore now!</string>
+    <string name="code">Enter code</string>
+    <string name="home">Home</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="wellcome">Good to see you!</string>
+    <string name="slogan2">Let\'s Start work out right now!</string>
+    <string name="home_section_name1">Workout today</string>
+    <string name="summery">Summery</string>
+    <string name="step">Step</string>
+    <string name="calorie">Calorie</string>
+    <string name="default_step">0000</string>
+    <string name="default_calorie">000</string>
+    <string name="unit_calorie">CAL</string>
+    <string name="workout">Workout Recommendation</string>
+    <string name="heart">Heart rate</string>
+    <string name="history">History</string>
+    <string name="list">Program</string>
+    <string name="add">Add new exercise</string>
+    <string name="user_name">User name</string>
+    <string name="user_slogan">Set slogan here</string>
+    <string name="setting">Setting</string>
+    <string name="notification">Notification</string>
+    <string name="privacy">Privacy</string>
+    <string name="about">About</string>
+    <string name="plan">Start Plan</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="new_plan">New plan</string>
+    <string name="notice_title">Tap to add exercise name</string>
+    <string name="notice_description">Tap to add exercise description</string>
+    <string name="notice_group">Tap to add muscle group</string>
+    <string name="set_notification_set2">Remind me at</string>
+    <string name="home_slogan">Train Hard</string>
+    <string name="home_slogan2">Play Smart</string>
+    <string name="contact">Contact Us</string>
+    <string name="time">Time</string>
+    <string name="current">Current Plan</string>
+    <string name="add_to_plan">Add to plan</string>
+    <string name="set">Set</string>
+    <string name="reps">Reps</string>
+    <string name="reps_default_value">10</string>
+    <string name="weight">Weight</string>
+    <string name="weight_default_value">30</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel Workout</string>
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
