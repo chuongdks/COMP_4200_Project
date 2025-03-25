@@ -1,5 +1,6 @@
 package com.example.workout.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,9 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
+import com.example.workout.fragments.start.NewplanActivity;
+import com.example.workout.fragments.start.StartActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +26,7 @@ import com.example.workout.activities.WorkoutViewModel;
 public class StartFragment extends Fragment {
     WorkoutViewModel viewModel;
     TextView exerciseName;
+    Button btn_newplan, btn_start;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,15 +73,36 @@ public class StartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_start, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        // Assign View by ID
+//        Assign View by ID
 //        exerciseName = view.findViewById(R.id.exercise_name);
-//        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+            viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+            btn_newplan = view.findViewById(R.id.button_new_plan);
+            btn_start = view.findViewById(R.id.button_start);
+
+            //start newplan activity when clicked
+            btn_newplan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), NewplanActivity.class);
+                    startActivity(intent);
+                }
+            });
+        //start start activity when clicked
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), StartActivity.class);
+                startActivity(intent);
+            }
+        });
+
 //
 //        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
 //            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
