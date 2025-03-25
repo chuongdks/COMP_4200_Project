@@ -13,6 +13,12 @@
         android:theme="@style/Theme.WorkOut"
         tools:targetApi="31">
         <activity
+            android:name=".fragments.start.StartActivity"
+            android:exported="false" />
+        <activity
+            android:name=".fragments.start.NewplanActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.LoginActivity"
             android:exported="false" />
         <activity
