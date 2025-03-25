@@ -30,6 +30,7 @@ public class StartActivity extends AppCompatActivity {
             return insets;
         });
 
+
         back = findViewById(R.id.imageButton_back);
         back.bringToFront();
         back.setOnClickListener(new View.OnClickListener() {
