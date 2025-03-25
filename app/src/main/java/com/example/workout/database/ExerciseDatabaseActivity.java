@@ -1,6 +1,5 @@
 package com.example.workout.database;
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.workout.R;
 
-public class ExerciseDatabase extends AppCompatActivity {
+public class ExerciseDatabaseActivity extends AppCompatActivity {
     Button addButton, editButton, deleteButton, displayButton;
     EditText titleText, descText, muscleText;
 
@@ -75,13 +74,15 @@ public class ExerciseDatabase extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Waiting to display!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    while (cursor.moveToNext()) {
-                        cursorInfo += "\nTitle: " + cursor.getString(1) + " Description: " + cursor.getString(3)
-                        + " Muscle: " + cursor.getString(4);
+                    while (cursor.moveToNext())
+                    {
+                        cursorInfo += "\nTitle: " + cursor.getString(1) +
+                                      " Description: " + cursor.getString(3) +
+                                      " Muscle: " + cursor.getString(4);
                     }
                 }
 
-                AlertDialog.Builder alertMessage = new AlertDialog.Builder(ExerciseDatabase.this);
+                AlertDialog.Builder alertMessage = new AlertDialog.Builder(ExerciseDatabaseActivity.this);
                 alertMessage.setTitle("Database info");
                 alertMessage.setMessage(cursorInfo);
                 alertMessage.setCancelable(true);
@@ -100,6 +101,7 @@ public class ExerciseDatabase extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 db.deleteAllExercises();
+                Toast.makeText(ExerciseDatabaseActivity.this, "DATABASE IMPLIED THE EXISTENCE OF DATACRINGE", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

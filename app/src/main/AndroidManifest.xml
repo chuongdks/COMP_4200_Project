@@ -13,7 +13,16 @@
         android:theme="@style/Theme.WorkOut"
         tools:targetApi="31">
         <activity
-            android:name=".database.ExerciseDatabase"
+            android:name=".login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.NotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".minigame.MiniGameActivity"
+            android:exported="false" />
+        <activity
+            android:name=".database.ExerciseDatabaseActivity"
             android:exported="false" />
         <activity
             android:name=".activities.exercise.ExerciseListActivity"
@@ -30,6 +39,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import com.example.workout.fragments.exercise.ExerciseDataSet;
@@ -148,7 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DELETE FROM sqlite_sequence WHERE name='exercise'"); // Reset ID count
     }
 
-    // Nuke the "Selectec Exercise" database
+    // Nuke the "Selected Exercise" database
     public void deleteAllSelectedExercises() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM SelectedExercise");
@@ -163,6 +164,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("description", description);                          // !!! The KEY MUST MATCH the attribute name
 
         // Update the description column given the title and return row # that is affected (Why query is not needed now?)
-        return db.update("exercise", contentValues, "title=?", new String[]{muscleInput});    // return as long becuz it will return table info when it does the operation
+        return db.update("exercise", contentValues, "name=?", new String[]{muscleInput});    // return as long becuz it will return table info when it does the operation
     }
 }

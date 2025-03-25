@@ -1,14 +1,17 @@
 package com.example.workout.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.workout.R;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,9 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private PieChart pieChart1;
+    private PieChart pieChart2;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +67,74 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        
+        // Initialize pie charts
+        pieChart1 = view.findViewById(R.id.delete_pie);
+        pieChart2 = view.findViewById(R.id.delete_pie2);
+        
+        // Setup the pie charts
+        setupPieChart1();
+        setupPieChart2();
+        
+        return view;
+    }
+    
+    private void setupPieChart1() {
+        // Simple pie chart without legends or labels
+        pieChart1.setUsePercentValues(true);
+        pieChart1.getDescription().setEnabled(false);
+        pieChart1.setDrawHoleEnabled(true);
+        pieChart1.setHoleColor(Color.TRANSPARENT);
+        pieChart1.setHoleRadius(30f);
+        pieChart1.setTransparentCircleRadius(35f);
+        pieChart1.setDrawCenterText(false);
+        pieChart1.setRotationEnabled(false);
+        pieChart1.setHighlightPerTapEnabled(false);
+        pieChart1.getLegend().setEnabled(false);
+        
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(40f, ""));
+        entries.add(new PieEntry(30f, ""));
+        entries.add(new PieEntry(30f, ""));
+        
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(getResources().getColor(R.color.mainColor1), 
+                          getResources().getColor(R.color.mainColor2), 
+                          getResources().getColor(R.color.viewColor));
+        dataSet.setDrawValues(false);
+        dataSet.setDrawIcons(false);
+        
+        PieData data = new PieData(dataSet);
+        pieChart1.setData(data);
+        pieChart1.invalidate();
+    }
+    
+    private void setupPieChart2() {
+        // Simple pie chart without legends or labels
+        pieChart2.setUsePercentValues(true);
+        pieChart2.getDescription().setEnabled(false);
+        pieChart2.setDrawHoleEnabled(true);
+        pieChart2.setHoleColor(Color.TRANSPARENT);
+        pieChart2.setHoleRadius(30f);
+        pieChart2.setTransparentCircleRadius(35f);
+        pieChart2.setDrawCenterText(false);
+        pieChart2.setRotationEnabled(false);
+        pieChart2.setHighlightPerTapEnabled(false);
+        pieChart2.getLegend().setEnabled(false);
+        
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(70f, ""));
+        entries.add(new PieEntry(30f, ""));
+        
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(getResources().getColor(R.color.mainColor1), 
+                          getResources().getColor(R.color.viewColor));
+        dataSet.setDrawValues(false);
+        dataSet.setDrawIcons(false);
+        
+        PieData data = new PieData(dataSet);
+        pieChart2.setData(data);
+        pieChart2.invalidate();
     }
 }

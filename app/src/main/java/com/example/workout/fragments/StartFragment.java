@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import com.example.workout.R;
 import com.example.workout.activities.WorkoutViewModel;
@@ -23,7 +22,6 @@ import com.example.workout.activities.WorkoutViewModel;
 public class StartFragment extends Fragment {
     WorkoutViewModel viewModel;
     TextView exerciseName;
-    Button newPlan, show1, show2;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,29 +74,15 @@ public class StartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
-
-        // Assign View by ID
-
-        newPlan = view.findViewById(R.id.btn_newPlan);
-        show1 = view.findViewById(R.id.btn_show1);
-        show2 = view.findViewById(R.id.btn_show2);
-        // exerciseName = view.findViewById(R.id.exercise_name);
-
-        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
-
-        show1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
-            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
-            if (exercise != null) {
-                exerciseName.setText("Selected Exercise: " + exercise.getName() + "\nDescription: " + exercise.getDescription());
-            }
-        });
+//        // Assign View by ID
+//        exerciseName = view.findViewById(R.id.exercise_name);
+//        viewModel = new ViewModelProvider(requireActivity()).get(WorkoutViewModel.class);
+//
+//        viewModel.getSelectedExercise().observe(getViewLifecycleOwner(), exercise -> {
+//            Log.d("test2", "DEBUG: StartFragment exercise:" + exercise.getName());
+//            if (exercise != null) {
+//                exerciseName.setText("Selected Exercise: " + exercise.getName() + "\nDescription: " + exercise.getDescription());
+//            }
+//        });
     }
 }

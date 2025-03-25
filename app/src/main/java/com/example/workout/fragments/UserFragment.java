@@ -1,5 +1,6 @@
 package com.example.workout.fragments;
 
+import android.content.Intent;
 import android.media.SoundPool;
 import android.os.Bundle;
 
@@ -10,32 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.workout.R;
+import com.example.workout.activities.NotificationActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link UserFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class UserFragment extends Fragment {
-    // Declare view for this scope
-    Button buttonUp, buttonDown, buttonLeft, buttonRight, buttonCancel, buttonOK;
-    TextView tvStrategem, tvInput, tvTargetStrategem;
-    // Other variable
-    ArrayList<String> inputSequence = new ArrayList<>();
-    HashMap<String, String> strategemMap = new HashMap<>();
-    SoundPool soundPool;
-    int soundButton, soundSuccess, soundFail, soundConfirm;
-    boolean gameActive = false;
-    String targetSequence = "";
 
+public class UserFragment extends Fragment {
+    View view_notification_setting;
+    ImageView img_email, img_facebook;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -84,127 +74,21 @@ public class UserFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
 
-    // https://stackoverflow.com/questions/53579162/cannot-resolve-findviewbyid-in-fragment and https://www.repeato.app/how-to-use-findviewbyid-in-a-fragment/
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Assign View by ID
-        buttonUp = view.findViewById(R.id.bt_up);
-        buttonDown = view.findViewById(R.id.bt_down);
-        buttonLeft = view.findViewById(R.id.bt_left);
-        buttonRight = view.findViewById(R.id.bt_right);
-        tvStrategem = view.findViewById(R.id.tv_strategem);
-        tvInput = view.findViewById(R.id.tv_input);
-        tvTargetStrategem = view.findViewById(R.id.tv_target);
+        view_notification_setting = view.findViewById(R.id.view_setting1);
+        img_email = view.findViewById(R.id.image_email);
+        img_facebook = view.findViewById(R.id.image_facebook);
 
-        // Sound Setup
-        soundPool = new SoundPool.Builder().setMaxStreams(2).build();
-        // Sound List (Add more Sounds here)
-        soundButton = soundPool.load(requireActivity(), R.raw.button_click, 1);
-        soundSuccess = soundPool.load(requireContext(), R.raw.correct1, 1);
-        soundFail = soundPool.load(getActivity(), R.raw.error, 1);
-        soundConfirm = soundPool.load(getContext(), R.raw.confirmdeploy, 1);
-
-        // Define List of Strategems Key Value pair(Add more strategem inputs here)
-        strategemMap.put("up right down down down", "500 KG Bomb");
-        strategemMap.put("up down right left", "Reinforcement");
-        strategemMap.put("right down up right down", "Orbital Laser");
-        strategemMap.put("down up right down up right down up", "Hell bomb");
-
-        startNewGame(); // Start the first game
-
-        // Directional Button click listener
-        buttonUp.setOnClickListener(new View.OnClickListener() {
+        view_notification_setting.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                // Foo
-                handleInput("up");
+            public void onClick(View view) {
+
+                Intent intentAdd = new Intent(getContext(), NotificationActivity.class);
+                startActivity(intentAdd);
             }
         });
-        buttonDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Foo
-                handleInput("down");
-            }
-        });
-        buttonLeft.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Foo
-                handleInput("left");
-            }
-        });
-        buttonRight.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Foo
-                handleInput("right");
-            }
-        });
-    }
-
-    // Start a new round by select random Strategem
-    void startNewGame() {
-        List<String> keys = new ArrayList<>(strategemMap.keySet()); // return a Set of keys, put them in a List
-        Random random = new Random();
-        targetSequence = keys.get(random.nextInt(keys.size()));     // Choose a random strategem for the TargetSequence
-
-        // Clear the screen and set game flag to True
-        tvTargetStrategem.setText(targetSequence);                  // Show the Target Strategem
-        tvInput.setText("");
-        tvStrategem.setText("");
-        inputSequence.clear();
-        gameActive = true;
-    }
-
-    // Handle the input sequence everytime a direction button is pressed funciton
-    void handleInput(String directionInput) {
-        // Check if game flag is active
-        if (!gameActive) return;
-
-        // Handle the Directional input
-        inputSequence.add(directionInput);
-        soundPool.play(soundButton, 1, 1, 0, 0, 1);
-        String currentSequence = String.join(" ", inputSequence);
-        tvInput.setText(currentSequence); // display Strategem name
-
-        // Check the input during gameplay
-        checkInput();
-    }
-
-    // Reset input sequence
-    void resetInput() {
-        soundPool.play(soundFail, 1, 1, 0, 0, 1);
-        inputSequence.clear();
-        tvInput.setText("");
-        tvStrategem.setText("");
-    }
-
-    // Check input during gameplay, if missed input -> reset, if fully correct move to next strategem
-    void checkInput() {
-        String currentSequence = String.join(" ", inputSequence);
-
-        //  Detect error in the current sequence when button is pressed, check for every step (Just like the game)
-        if (!targetSequence.startsWith(currentSequence)) {
-            resetInput();
-            return;
-        }
-
-        if (currentSequence.equals(targetSequence)) {
-            tvStrategem.setText("Correct!");
-            soundPool.play(soundSuccess, 1, 1, 0, 0, 1);
-            gameActive = false;
-
-            // Start next sequence after delay
-            tvStrategem.postDelayed(this::startNewGame, 2000);
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        soundPool.release();
     }
 }
