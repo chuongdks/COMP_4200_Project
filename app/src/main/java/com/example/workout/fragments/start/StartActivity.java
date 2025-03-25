@@ -3,8 +3,6 @@ package com.example.workout.fragments.start;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -17,7 +15,7 @@ import com.example.workout.R;
 
 public class StartActivity extends AppCompatActivity {
 
-    ImageButton back;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +29,7 @@ public class StartActivity extends AppCompatActivity {
         });
 
 
-        back = findViewById(R.id.imageButton_back);
-        back.bringToFront();
+        back = findViewById(R.id.imageview_back2);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

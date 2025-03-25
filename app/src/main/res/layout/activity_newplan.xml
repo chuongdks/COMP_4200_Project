@@ -19,10 +19,11 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">>
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView_back"
+            android:translationZ="90dp"
+            android:id="@+id/imageview_back"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_gravity="center_vertical"
