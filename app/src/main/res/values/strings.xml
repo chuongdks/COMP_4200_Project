@@ -44,4 +44,6 @@
     <string name="home_slogan2">Play Smart</string>
     <string name="contact">Contact Us</string>
     <string name="time">Time</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
