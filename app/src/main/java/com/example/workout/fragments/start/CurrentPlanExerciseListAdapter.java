@@ -1,40 +1,29 @@
 package com.example.workout.fragments.start;
 
-import android.R.color;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.workout.R;
-import com.example.workout.activities.WorkoutViewModel;
-import com.example.workout.database.DBHelper;
 import com.example.workout.fragments.exercise.ExerciseDataSet;
-import com.example.workout.fragments.exercise.activities.ExerciseDetailActivity;
 
 import java.util.ArrayList;
 
-public class NewPlanExerciseListAdapter extends RecyclerView.Adapter<NewPlanExerciseListAdapter.MyViewHolder>{
+public class CurrentPlanExerciseListAdapter extends RecyclerView.Adapter<CurrentPlanExerciseListAdapter.MyViewHolder>{
     // Member has Arraylist of Text n Image, Context and
     ArrayList<ExerciseDataSet> dataList;
-    ArrayList<ExerciseDataSet> selected;
     Context context;
     CheckBox cb;
 
     // Constructor
-    public NewPlanExerciseListAdapter(ArrayList<ExerciseDataSet> data, Context context) {
+    public CurrentPlanExerciseListAdapter(ArrayList<ExerciseDataSet> data, Context context) {
         this.dataList = data;
         this.context = context;
     }
@@ -46,7 +35,6 @@ public class NewPlanExerciseListAdapter extends RecyclerView.Adapter<NewPlanExer
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.card_view2, parent, false); // take
-        selected = new ArrayList<ExerciseDataSet>();
         return new MyViewHolder(view);
 
     }
@@ -57,25 +45,7 @@ public class NewPlanExerciseListAdapter extends RecyclerView.Adapter<NewPlanExer
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ExerciseDataSet data = dataList.get(position);
         holder.textView.setText(data.getName());
-        holder.cb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(holder.cb.isChecked())
-                {
-
-                    selected.add(data);
-                }
-                else {
-                    selected.remove(data);
-                }
-            }
-        });
-
-
-    }
-
-    public ArrayList<ExerciseDataSet> getSelected() {
-        return selected;
+        holder.cb.setVisibility(View.GONE);
     }
 
     // getItemCount() doc: Returns the total number of items in the data set held by the adapter.

@@ -34,14 +34,13 @@
                 android:textColor="@color/textColor"
                 android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/bt_addtoplan"
-                android:layout_width="wrap_content"
+            <CheckBox
+                android:id="@+id/cb_addtoplan"
                 android:layout_height="60dp"
+                android:layout_width="wrap_content"
                 android:background="@drawable/style_button_linear"
-                android:text="Add"
-                android:visibility="gone"
-                app:backgroundTint="@null" />
+                app:backgroundTint="@null"
+                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>
