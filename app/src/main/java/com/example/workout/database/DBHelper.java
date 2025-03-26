@@ -132,11 +132,11 @@ public class DBHelper extends SQLiteOpenHelper {
     // method to Delete a row from the table using given title
     public Cursor deleteData(String muscleInput) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM exercise WHERE muscle_group=?", new String[]{muscleInput} );
+        Cursor cursor = db.rawQuery("SELECT * FROM exercise WHERE name=?", new String[]{muscleInput} );
 
         // WHy need this part along with query?
         if (cursor.getCount() > 0) {
-            db.delete("exercise", "muscle_group=?", new String[]{muscleInput});
+            db.delete("exercise", "name=?", new String[]{muscleInput});
         }
 
         return cursor;  // return cursor pointing to the result set (If cursor 0, nothing in db)

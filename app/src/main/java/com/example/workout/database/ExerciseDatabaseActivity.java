@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +20,7 @@ import com.example.workout.R;
 public class ExerciseDatabaseActivity extends AppCompatActivity {
     Button addButton, editButton, deleteButton, displayButton;
     EditText titleText, descText, muscleText;
+    ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class ExerciseDatabaseActivity extends AppCompatActivity {
         editButton = findViewById(R.id.bt_edit);
         deleteButton = findViewById(R.id.bt_delete);
         displayButton = findViewById(R.id.bt_display);
+        backButton = findViewById(R.id.bt_back);
         titleText = findViewById(R.id.et_title);
         descText = findViewById(R.id.et_description);
         muscleText = findViewById(R.id.et_muscle);
@@ -94,6 +97,9 @@ public class ExerciseDatabaseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.deleteData(titleText.getText().toString());
+                titleText.setText("");
+                descText.setText("");
+                muscleText.setText("");
             }
         });
 
@@ -115,5 +121,14 @@ public class ExerciseDatabaseActivity extends AppCompatActivity {
                 long rowInfo = db.updateData(title, description);
             }
         });
+
+        // Back button
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 }

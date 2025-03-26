@@ -8,17 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 import com.example.workout.R;
-import com.example.workout.activities.WorkoutViewModel;
 import com.example.workout.database.DBHelper;
 import com.example.workout.database.ExerciseDatabaseActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 
 /**
@@ -30,7 +26,6 @@ public class ExerciseListFragment extends Fragment {
     // Declare variable
     RecyclerView recyclerView;
     ArrayList<ExerciseDataSet> dataSets = new ArrayList<>();
-    WorkoutViewModel viewModel;
     ImageView addExerciseButton;
     ExerciseFragmentAdapter myAdapter;
     DBHelper db;
