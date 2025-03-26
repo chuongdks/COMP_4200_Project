@@ -31,10 +31,6 @@
             android:name=".database.ExerciseDatabaseActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.exercise.ExerciseListActivity"
-            android:exported="false"
-            tools:ignore="MissingClass" />
-        <activity
             android:name=".fragments.exercise.activities.ExerciseDetailActivity"
             android:exported="false" />
         <activity
